@@ -30,20 +30,20 @@ namespace Trangselskatt
             Console.WriteLine($"Total avgiften är {totalAvgift} kr");
         }
 
-        public static List<DateTime> ParseInputData(string datumTider)
+        public static List<DateTime> ParseInputData(string datumOchTider)
         {
-            return datumTider.Split(',')
-            .Select(dt => dt.Trim())
-            .Select(dtStr =>
+            return datumOchTider.Split(',')
+            .Select(datumTid => datumTid.Trim())
+            .Select(rensatDatumTid =>
             {
-            if (DateTime.TryParseExact(dtStr, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tidpunkt))
+            if (DateTime.TryParseExact(rensatDatumTid, "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime tidpunkt))
             {
               return (DateTime?)tidpunkt;
             }
               return null;
             })
-             .Where(dt => dt.HasValue)
-             .Select(dt => dt!.Value)
+             .Where(datumTid => datumTid.HasValue)
+             .Select(datumTid => datumTid!.Value)
              .ToList();
         }
 

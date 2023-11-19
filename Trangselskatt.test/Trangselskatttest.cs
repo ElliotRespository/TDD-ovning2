@@ -16,12 +16,12 @@ namespace Trangselskatt.test
         public void TestaRäknaTotalBeloppEnskildTid(string datumTid, string forvantatResultat)
         {
             // Arrange
-            var sw = new StringWriter();
-            Console.SetOut(sw);
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
             // Act
             Metoder.RäknaTotalBelopp(datumTid);
-            var resultat = sw.ToString().Trim();
+            var resultat = stringWriter.ToString().Trim();
 
             // Assert
             Assert.That(resultat, Is.EqualTo(forvantatResultat));
@@ -34,12 +34,12 @@ namespace Trangselskatt.test
             // Arrange
             var input = "2023-05-31 06:15, 2023-05-31 07:45, 2023-05-31 15:15, 2023-05-31 18:45";
             var forvantatResultat = "Total avgiften är 39 kr";
-            var sw = new StringWriter();
-            Console.SetOut(sw);
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
             // Act
             Metoder.RäknaTotalBelopp(input);
-            var resultat = sw.ToString().Trim();
+            var resultat = stringWriter.ToString().Trim();
 
             // Assert
             Assert.That(resultat, Is.EqualTo(forvantatResultat));
@@ -101,12 +101,12 @@ namespace Trangselskatt.test
             foreach (var (datum, förväntatResultat) in testData)
             {
                 // Arrange
-                var sw = new StringWriter();
-                Console.SetOut(sw);
+                var stringWriter = new StringWriter();
+                Console.SetOut(stringWriter);
 
                 // Act
                 Metoder.RäknaTotalBelopp(datum);
-                var resultat = sw.ToString().Trim();
+                var resultat = stringWriter.ToString().Trim();
 
                 // Assert
                 Assert.That(resultat, Is.EqualTo(förväntatResultat), $"Test misslyckades för datum: {datum}");
@@ -120,12 +120,12 @@ namespace Trangselskatt.test
             //Arrange
             var input = "2023-05-31 06:20, 2023-05-31 06:45, 2023-05-31 07:10"; // Avgifter: 8 kr, 13 kr, 18 kr
             var forvantatResultat = "Total avgiften är 18 kr"; // Högsta avgift inom första 60 minuter
-            var sw = new StringWriter();
-            Console.SetOut(sw);
+            var stringWriter = new StringWriter();
+            Console.SetOut(stringWriter);
 
             //Act
             Metoder.RäknaTotalBelopp(input);
-            var resultat = sw.ToString().Trim();
+            var resultat = stringWriter.ToString().Trim();
 
             //Assert
             Assert.That(resultat, Is.EqualTo(forvantatResultat));
